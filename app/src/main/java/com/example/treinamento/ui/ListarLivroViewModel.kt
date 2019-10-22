@@ -1,9 +1,9 @@
-package com.example.treinamento.activity
+package com.example.treinamento.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import com.example.treinamento.repository.LivroRepositorio
+import com.example.treinamento.domain.repository.LivroRepositorio
 
 class ListarLivroViewModel: ViewModel() {
     private val repositorio: LivroRepositorio = LivroRepositorio()

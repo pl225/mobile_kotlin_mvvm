@@ -1,7 +1,6 @@
 package com.example.treinamento.retrofit
 
-import com.example.treinamento.model.Livro
-import retrofit2.Call
+import com.example.treinamento.domain.model.Livro
 import retrofit2.http.GET
 
 interface Webservice {
