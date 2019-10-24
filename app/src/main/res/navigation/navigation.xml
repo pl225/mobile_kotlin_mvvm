@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/listaLivroFragment"
         android:name="com.example.treinamento.ui.ListaLivroFragment"
-        android:label="fragment_lista_livro"
+        android:label="Livros"
         tools:layout="@layout/fragment_lista_livro" />
 </navigation>
