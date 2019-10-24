@@ -9,7 +9,7 @@ import com.example.treinamento.domain.model.Livro
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_livro.view.*
 
-class LivroAdapter(private val livros: List<Livro>): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
+class LivroAdapter(private var livros: List<Livro>): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
 
     class LivroViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -31,6 +31,11 @@ class LivroAdapter(private val livros: List<Livro>): RecyclerView.Adapter<LivroA
             .get()
             .load(livros[position].capa)
             .into(holder.itemView.img)
+    }
+
+    fun updateDataSet(list: List<Livro>) {
+        this.livros = list
+        notifyDataSetChanged()
     }
 }
 

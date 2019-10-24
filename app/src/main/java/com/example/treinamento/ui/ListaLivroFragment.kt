@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.treinamento.R
+import com.example.treinamento.domain.model.Livro
 import kotlinx.android.synthetic.main.fragment_lista_livro.*
 
 /**
@@ -24,7 +25,6 @@ class ListaLivroFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         this.setHasOptionsMenu(true)
-
         return inflater.inflate(R.layout.fragment_lista_livro, container, false)
     }
 
@@ -34,16 +34,21 @@ class ListaLivroFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController()) || super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController()) || super.onOptionsItemSelected(item)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel =  ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ListarLivroViewModel::class.java)
 
+        rcyLivros.addItemDecoration(DividerItemDecoration(activity, (rcyLivros.layoutManager as LinearLayoutManager).orientation))
+        rcyLivros.adapter = LivroAdapter(listOf())
+
         viewModel.livros.observe(this, Observer {
-            rcyLivros.addItemDecoration(DividerItemDecoration(activity, (rcyLivros.layoutManager as LinearLayoutManager).orientation))
-            rcyLivros.adapter = LivroAdapter(it)
+            if (it.isSuccessful()) {
+                val itens = it.data as List<*>
+                (rcyLivros.adapter as LivroAdapter).updateDataSet(itens.filterIsInstance<Livro>())
+            }
         })
     }
 
