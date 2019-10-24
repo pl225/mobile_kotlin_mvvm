@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.ListaLivroFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcyLivros"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_livro"/>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.treinamento.ui.ListarLivroViewModel" />
+    </data>
 
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcyLivros"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_livro"/>
+
+        <include
+            layout="@layout/progressbar_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:hide="@{viewModel.loading}"/>
+
+        <include
+            layout="@layout/layout_error_with_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:hide="@{viewModel.isError}"/>
+
+    </FrameLayout>
+
+</layout>

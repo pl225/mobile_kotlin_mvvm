@@ -15,17 +15,25 @@ import com.example.treinamento.R
 import com.example.treinamento.domain.model.Livro
 import kotlinx.android.synthetic.main.fragment_lista_livro.*
 
+import com.example.treinamento.databinding.FragmentListaLivroBinding
+
 /**
  * A simple [Fragment] subclass.
  */
 class ListaLivroFragment : Fragment() {
 
     lateinit var viewModel: ListarLivroViewModel
+    lateinit var binding: FragmentListaLivroBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         this.setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_lista_livro, container, false)
+
+        this.binding = FragmentListaLivroBinding.inflate(inflater, container, false)
+        this.binding.lifecycleOwner = this.viewLifecycleOwner
+        this.binding.executePendingBindings()
+
+        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -39,12 +47,14 @@ class ListaLivroFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel =  ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ListarLivroViewModel::class.java)
+        this.viewModel =  ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ListarLivroViewModel::class.java)
+
+        this.binding.viewModel = this.viewModel
 
         rcyLivros.addItemDecoration(DividerItemDecoration(activity, (rcyLivros.layoutManager as LinearLayoutManager).orientation))
         rcyLivros.adapter = LivroAdapter(listOf())
 
-        viewModel.livros.observe(this, Observer {
+        this.viewModel.livros.observe(this, Observer {
             if (it.isSuccessful()) {
                 val itens = it.data as List<*>
                 (rcyLivros.adapter as LivroAdapter).updateDataSet(itens.filterIsInstance<Livro>())

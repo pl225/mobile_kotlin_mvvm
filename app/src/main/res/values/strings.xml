@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Treinamento</string>
     <string name="imagem_do_livro">Imagem do livro</string>
+    <string name="msg_erro_lista">Erro ao carregar. Aperte para recarregar a página.</string>
 </resources>
