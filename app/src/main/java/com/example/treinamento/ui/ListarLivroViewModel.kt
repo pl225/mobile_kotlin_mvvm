@@ -1,7 +1,6 @@
 package com.example.treinamento.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.treinamento.api.Response
@@ -12,24 +11,21 @@ import java.lang.Exception
 class ListarLivroViewModel: ViewModel() {
     private val repositorio: LivroRepositorio = LivroRepositorio()
 
-    private var _loading = MutableLiveData(false)
-    private var _isError = MutableLiveData(false)
-
-    var loading :    LiveData<Boolean> = _loading
-    var isError : LiveData<Boolean> = _isError
+    val loading = ObservableBoolean(false)
+    val isError = ObservableBoolean(false)
 
     val livros = liveData(Dispatchers.IO) {
         try {
-            _loading.postValue(true)
+            loading.set(true)
             val livrosRecebidos = repositorio.getAll()
-            _isError.postValue(false)
+            isError.set(false)
 
             emit(Response.success(livrosRecebidos))
         } catch (e: Exception) {
-            _isError.postValue(true)
+            isError.set(true)
             emit(Response.error(Throwable(e.message)))
         } finally {
-            _loading.postValue(false)
+            loading.set(false)
         }
     }
 }

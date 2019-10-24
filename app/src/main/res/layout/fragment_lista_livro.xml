@@ -26,13 +26,13 @@
             layout="@layout/progressbar_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:hide="@{viewModel.loading}"/>
+            app:isVisible="@{viewModel.loading}"/>
 
         <include
             layout="@layout/layout_error_with_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:hide="@{viewModel.isError}"/>
+            app:isVisible="@{viewModel.isError}"/>
 
     </FrameLayout>
 

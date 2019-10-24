@@ -31,7 +31,6 @@ class ListaLivroFragment : Fragment() {
 
         this.binding = FragmentListaLivroBinding.inflate(inflater, container, false)
         this.binding.lifecycleOwner = this.viewLifecycleOwner
-        this.binding.executePendingBindings()
 
         return binding.root
     }
