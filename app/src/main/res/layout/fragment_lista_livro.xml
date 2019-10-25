@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.ListaLivroFragment">
+    tools:context=".ui.lista_livros.ListaLivroFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.example.treinamento.ui.ListarLivroViewModel" />
+            type="com.example.treinamento.ui.lista_livros.ListarLivroViewModel" />
     </data>
 
     <FrameLayout
