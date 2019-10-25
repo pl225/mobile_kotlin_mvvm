@@ -1,4 +1,4 @@
-package com.example.treinamento.ui
+package com.example.treinamento.ui.lista_livros
 
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel

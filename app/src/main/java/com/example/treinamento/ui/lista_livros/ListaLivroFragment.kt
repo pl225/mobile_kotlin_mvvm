@@ -1,4 +1,4 @@
-package com.example.treinamento.ui
+package com.example.treinamento.ui.lista_livros
 
 
 import android.os.Bundle
@@ -46,7 +46,8 @@ class ListaLivroFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        this.viewModel =  ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ListarLivroViewModel::class.java)
+        this.viewModel =  ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            ListarLivroViewModel::class.java)
 
         this.binding.viewModel = this.viewModel
 

@@ -1,4 +1,4 @@
-package com.example.treinamento.ui
+package com.example.treinamento.ui.lista_livros
 
 import android.view.LayoutInflater
 import android.view.View
