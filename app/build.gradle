@@ -95,4 +95,7 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:$versionNavigation"
     implementation "android.arch.navigation:navigation-ui-ktx:$versionNavigation"
 
+    /* SharedPreferences LiveData*/
+    implementation 'com.github.ibrahimsn98:live-preferences:1.6'
+
 }

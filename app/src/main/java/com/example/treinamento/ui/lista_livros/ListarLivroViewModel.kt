@@ -6,6 +6,7 @@ import androidx.lifecycle.liveData
 import com.example.treinamento.api.Response
 import kotlinx.coroutines.Dispatchers
 import com.example.treinamento.domain.repository.LivroRepositorio
+import com.example.treinamento.util.AppSharedPreferences
 import java.lang.Exception
 
 class ListarLivroViewModel: ViewModel() {
@@ -13,6 +14,7 @@ class ListarLivroViewModel: ViewModel() {
 
     val loading = ObservableBoolean(false)
     val isError = ObservableBoolean(false)
+    val saldo = AppSharedPreferences.getDinheiroLiveData()
 
     val livros = liveData(Dispatchers.IO) {
         try {

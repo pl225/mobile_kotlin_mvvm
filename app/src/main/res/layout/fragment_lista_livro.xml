@@ -10,13 +10,21 @@
             type="com.example.treinamento.ui.lista_livros.ListarLivroViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/txtSaldo"
+            android:textSize="20sp"
+            android:layout_margin="@dimen/margem_livro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcyLivros"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtSaldo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -24,16 +32,14 @@
 
         <include
             layout="@layout/progressbar_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:visibility="gone"
             app:isVisible="@{viewModel.loading}"/>
 
         <include
             layout="@layout/layout_error_with_refresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:visibility="gone"
             app:isVisible="@{viewModel.isError}"/>
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

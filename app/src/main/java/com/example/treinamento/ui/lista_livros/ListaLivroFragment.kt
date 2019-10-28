@@ -60,6 +60,10 @@ class ListaLivroFragment : Fragment() {
                 (rcyLivros.adapter as LivroAdapter).updateDataSet(itens.filterIsInstance<Livro>())
             }
         })
+
+        this.viewModel.saldo.observe(this, Observer {
+            this.binding.txtSaldo.text = String.format("Saldo disponível de R$ %.2f", it)
+        })
     }
 
 }
