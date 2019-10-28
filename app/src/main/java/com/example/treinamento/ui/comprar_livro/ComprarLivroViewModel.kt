@@ -15,7 +15,7 @@ class ComprarLivroViewModel : ViewModel() {
 
     fun comprarLivro () {
         try {
-            val novoSaldo = LivroController.comprarLivro(livro)
+            val novoSaldo = LivroController.comprarLivro()
             sucessoCompra.postValue(Response.success(novoSaldo))
         } catch (e: Throwable) {
             sucessoCompra.postValue(Response.error(e))

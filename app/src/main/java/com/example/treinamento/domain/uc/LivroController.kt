@@ -12,15 +12,7 @@ object LivroController {
     private var livroRepository: LivroRepositorio = LivroRepositorio()
 
     suspend fun getAll(): List<Livro> {
-
-        val response = livroRepository.getAll()
-
-        if (response.isSuccessful) {
-            this.livros = response.body() ?: listOf()
-            return this.livros
-        } else {
-            throw Throwable(response.errorBody()?.string())
-        }
+        return livroRepository.getAll()
     }
 
     fun selecionarLivro(posLivro: Int) {
@@ -34,10 +26,10 @@ object LivroController {
         return this.livros[this.posSelecionado]
     }
 
-    fun comprarLivro(livro: Livro): Float {
+    fun comprarLivro(): Float {
         var dinheiro = AppSharedPreferences.getUserDinheiro()
-        if (dinheiro >= livro.preco) {
-            dinheiro -= livro.preco.toFloat()
+        if (dinheiro >= livros[posSelecionado].preco) {
+            dinheiro -= livros[posSelecionado].preco.toFloat()
             AppSharedPreferences.setUserDinheiro(dinheiro)
             return dinheiro
         } else {
