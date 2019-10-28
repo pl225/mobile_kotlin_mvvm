@@ -4,4 +4,6 @@
     <string name="msg_erro_lista">Erro ao carregar. Aperte para recarregar a página.</string>
     <string name="compra_livros">Comprar livros</string>
     <string name="meus_livros">Meus livros</string>
+    <string name="saldo_disponivel">Saldo disponível de R$ %.2f</string>
+    <string name="preco">Preço: R$ %.2f</string>
 </resources>

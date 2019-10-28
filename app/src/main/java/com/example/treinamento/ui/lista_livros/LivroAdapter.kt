@@ -9,9 +9,15 @@ import com.example.treinamento.domain.model.Livro
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_livro.view.*
 
-class LivroAdapter(private var livros: List<Livro>): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
+class LivroAdapter(private var livros: List<Livro>, private val clicavel: ItemClicavel): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
 
-    class LivroViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    inner class LivroViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.setOnClickListener {
+                clicavel.clicar(livros[adapterPosition])
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LivroViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_livro, parent, false)
@@ -26,7 +32,7 @@ class LivroAdapter(private var livros: List<Livro>): RecyclerView.Adapter<LivroA
     override fun onBindViewHolder(holder: LivroViewHolder, position: Int) {
         holder.itemView.txtTitulo.text = livros[position].titulo
         holder.itemView.txtAutor.text = livros[position].autor
-        holder.itemView.txtPreco.text = livros[position].preco.toString()
+        holder.itemView.txtPreco.text = String.format(holder.itemView.context.getString(R.string.preco), livros[position].preco)
         Picasso
             .get()
             .load(livros[position].capa)

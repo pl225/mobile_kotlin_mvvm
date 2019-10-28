@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +21,7 @@ import com.example.treinamento.databinding.FragmentListaLivroBinding
 /**
  * A simple [Fragment] subclass.
  */
-class ListaLivroFragment : Fragment() {
+class ListaLivroFragment : Fragment(), ItemClicavel {
 
     lateinit var viewModel: ListarLivroViewModel
     lateinit var binding: FragmentListaLivroBinding
@@ -52,7 +53,7 @@ class ListaLivroFragment : Fragment() {
         this.binding.viewModel = this.viewModel
 
         rcyLivros.addItemDecoration(DividerItemDecoration(activity, (rcyLivros.layoutManager as LinearLayoutManager).orientation))
-        rcyLivros.adapter = LivroAdapter(listOf())
+        rcyLivros.adapter = LivroAdapter(listOf(), this)
 
         this.viewModel.livros.observe(this, Observer {
             if (it.isSuccessful()) {
@@ -62,8 +63,12 @@ class ListaLivroFragment : Fragment() {
         })
 
         this.viewModel.saldo.observe(this, Observer {
-            this.binding.txtSaldo.text = String.format("Saldo disponível de R$ %.2f", it)
+            this.binding.txtSaldo.text = String.format(getString(R.string.saldo_disponivel), it)
         })
+    }
+
+    override fun clicar(livro: Livro) {
+        this.findNavController().navigate(ListaLivroFragmentDirections.actionListaLivroFragmentToComprarLivroFragment(livro))
     }
 
 }
