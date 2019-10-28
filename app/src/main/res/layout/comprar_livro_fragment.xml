@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.treinamento.ui.comprar_livro.ComprarLivroViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,9 +15,28 @@
         tools:context=".ui.comprar_livro.ComprarLivroFragment">
 
         <TextView
+            android:id="@+id/txtTitulo"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.livro.titulo}"/>
+
+        <ImageView
+            android:id="@+id/img"
+            app:layout_constraintTop_toBottomOf="@id/txtTitulo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/imagem_do_livro"
+            app:loadImage="@{viewModel.livro.capa}"/>
+
+        <Button
+            android:id="@+id/btnComprar"
+            app:layout_constraintTop_toBottomOf="@id/img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/comprar_livro"
+            android:onClick="@{() -> viewModel.comprarLivro()}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,4 +6,5 @@
     <string name="meus_livros">Meus livros</string>
     <string name="saldo_disponivel">Saldo disponível de R$ %.2f</string>
     <string name="preco">Preço: R$ %.2f</string>
+    <string name="comprar_livro">Comprar livro</string>
 </resources>

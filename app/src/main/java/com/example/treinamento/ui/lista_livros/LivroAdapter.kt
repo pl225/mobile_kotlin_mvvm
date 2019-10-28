@@ -14,7 +14,7 @@ class LivroAdapter(private var livros: List<Livro>, private val clicavel: ItemCl
     inner class LivroViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
-                clicavel.clicar(livros[adapterPosition])
+                clicavel.clicar(adapterPosition)
             }
         }
     }

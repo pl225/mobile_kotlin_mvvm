@@ -22,9 +22,5 @@
         android:id="@+id/comprarLivroFragment"
         android:name="com.example.treinamento.ui.comprar_livro.ComprarLivroFragment"
         android:label="Comprar livro"
-        tools:layout="@layout/comprar_livro_fragment">
-        <argument
-            android:name="livro"
-            app:argType="com.example.treinamento.domain.model.Livro" />
-    </fragment>
+        tools:layout="@layout/comprar_livro_fragment"/>
 </navigation>

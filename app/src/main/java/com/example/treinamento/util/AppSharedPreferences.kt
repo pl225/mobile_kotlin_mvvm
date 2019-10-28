@@ -13,22 +13,25 @@ object AppSharedPreferences{
     private const val KEY_USER_MONEY = "${BuildConfig.APPLICATION_ID}.dinheiro"
     private const val DINHEIRO_INICIAL = 100f
 
-    fun getUserDinheiro(context: Context) : Float{
-        val prefs: SharedPreferences = context.getSharedPreferences(SESSION, Context.MODE_PRIVATE)
+    fun getUserDinheiro(): Float{
+        val prefs: SharedPreferences = this.getPrefs()!!
         return prefs.getFloat(KEY_USER_MONEY, DINHEIRO_INICIAL)
     }
 
-    fun setUserDinheiro(context: Context, value: Float){
-        val prefs: SharedPreferences = context.getSharedPreferences(SESSION, Context.MODE_PRIVATE)
-
+    fun setUserDinheiro(value: Float){
+        val prefs: SharedPreferences = this.getPrefs()!!
         val editor: SharedPreferences.Editor = prefs.edit()
         editor.putFloat(KEY_USER_MONEY, value)
         editor.apply()
     }
 
     fun getDinheiroLiveData(): LivePreference<Float> {
-        val prefs = App.instance.getSharedPreferences(SESSION, Context.MODE_PRIVATE)
+        val prefs = this.getPrefs()!!
         val livePrefs = LiveSharedPreferences(prefs)
         return livePrefs.getFloat(KEY_USER_MONEY, DINHEIRO_INICIAL)
+    }
+
+    private fun getPrefs(): SharedPreferences? {
+        return App.instance.getSharedPreferences(SESSION, Context.MODE_PRIVATE)
     }
 }

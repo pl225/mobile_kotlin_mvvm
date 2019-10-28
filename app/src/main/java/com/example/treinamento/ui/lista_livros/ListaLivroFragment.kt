@@ -67,8 +67,9 @@ class ListaLivroFragment : Fragment(), ItemClicavel {
         })
     }
 
-    override fun clicar(livro: Livro) {
-        this.findNavController().navigate(ListaLivroFragmentDirections.actionListaLivroFragmentToComprarLivroFragment(livro))
+    override fun clicar(livro: Int) {
+        this.viewModel.selecionarLivro(livro)
+        this.findNavController().navigate(ListaLivroFragmentDirections.actionListaLivroFragmentToComprarLivroFragment())
     }
 
 }
