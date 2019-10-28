@@ -1,4 +1,4 @@
-package com.example.treinamento.ui.lista_livros
+package com.example.treinamento.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.navigation.ui.NavigationUI
 import com.example.treinamento.R
 import com.example.treinamento.databinding.ActivityListarLivroBinding
 
-class ListarLivroActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     lateinit var drawerLayout: DrawerLayout
 
