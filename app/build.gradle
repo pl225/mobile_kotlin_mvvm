@@ -16,6 +16,7 @@ project.ext {
     picassoVersion = "2.71828"
     archVersion = "2.2.0-rc01"
     roomVersion = "2.2.1"
+    versionMaterial = "1.0.0"
 }
 
 android {
@@ -97,5 +98,8 @@ dependencies {
 
     /* SharedPreferences LiveData*/
     implementation 'com.github.ibrahimsn98:live-preferences:1.6'
+
+    /* Material Design */
+    implementation "com.google.android.material:material:$project.versionMaterial"
 
 }
