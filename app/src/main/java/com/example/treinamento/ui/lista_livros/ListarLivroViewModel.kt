@@ -10,7 +10,7 @@ import com.example.treinamento.util.AppSharedPreferences
 import java.lang.Exception
 
 class ListarLivroViewModel: ViewModel() {
-    private val repositorio: LivroRepositorio = LivroRepositorio()
+    private val livroController: LivroController = LivroController(LivroRepositorio())
 
     val loading = ObservableBoolean(false)
     val isError = ObservableBoolean(false)
@@ -19,7 +19,7 @@ class ListarLivroViewModel: ViewModel() {
     val livros = liveData(Dispatchers.IO) {
         try {
             loading.set(true)
-            val livrosRecebidos = repositorio.getAll()
+            val livrosRecebidos = livroController.getAll()
             isError.set(false)
 
             emit(Response.success(livrosRecebidos))
