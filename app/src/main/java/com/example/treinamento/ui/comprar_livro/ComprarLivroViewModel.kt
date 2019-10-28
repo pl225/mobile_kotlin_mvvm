@@ -1,23 +1,24 @@
 package com.example.treinamento.ui.comprar_livro
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.treinamento.api.Response
 import com.example.treinamento.domain.model.Livro
 import com.example.treinamento.domain.uc.LivroController
-import com.example.treinamento.exceptions.SaldoInsuficienteThrowable
-import com.example.treinamento.util.AppSharedPreferences
 
 class ComprarLivroViewModel : ViewModel() {
 
     var livro: Livro = LivroController.getLivroSelecionado()
     private set
 
+    val sucessoCompra = MutableLiveData<Response>()
+
     fun comprarLivro () {
-        var dinheiro = AppSharedPreferences.getUserDinheiro()
-        if (dinheiro >= this.livro.preco) {
-            dinheiro -= this.livro.preco.toFloat()
-            AppSharedPreferences.setUserDinheiro(dinheiro)
-        } else {
-            throw SaldoInsuficienteThrowable()
+        try {
+            val novoSaldo = LivroController.comprarLivro(livro)
+            sucessoCompra.postValue(Response.success(novoSaldo))
+        } catch (e: Throwable) {
+            sucessoCompra.postValue(Response.error(e))
         }
     }
 

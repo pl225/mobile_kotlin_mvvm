@@ -2,6 +2,8 @@ package com.example.treinamento.domain.uc
 
 import com.example.treinamento.domain.model.Livro
 import com.example.treinamento.domain.repository.LivroRepositorio
+import com.example.treinamento.exceptions.SaldoInsuficienteThrowable
+import com.example.treinamento.util.AppSharedPreferences
 
 object LivroController {
 
@@ -30,6 +32,17 @@ object LivroController {
 
     fun getLivroSelecionado (): Livro {
         return this.livros[this.posSelecionado]
+    }
+
+    fun comprarLivro(livro: Livro): Float {
+        var dinheiro = AppSharedPreferences.getUserDinheiro()
+        if (dinheiro >= livro.preco) {
+            dinheiro -= livro.preco.toFloat()
+            AppSharedPreferences.setUserDinheiro(dinheiro)
+            return dinheiro
+        } else {
+            throw SaldoInsuficienteThrowable()
+        }
     }
 
 }

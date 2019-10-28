@@ -22,5 +22,11 @@
         android:id="@+id/comprarLivroFragment"
         android:name="com.example.treinamento.ui.comprar_livro.ComprarLivroFragment"
         android:label="Comprar livro"
-        tools:layout="@layout/comprar_livro_fragment"/>
+        tools:layout="@layout/comprar_livro_fragment">
+        <action
+            android:id="@+id/action_comprarLivroFragment_to_listaLivroFragment"
+            app:destination="@id/listaLivroFragment"
+            app:popUpTo="@+id/listaLivroFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
