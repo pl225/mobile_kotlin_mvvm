@@ -2,6 +2,9 @@ package com.example.treinamento.di
 
 import com.example.treinamento.api.IRestApi
 import com.example.treinamento.domain.repository.LivroRepositorio
+import com.example.treinamento.ui.comprar_livro.ComprarLivroViewModel
+import com.example.treinamento.ui.lista_livros.ListarLivroViewModel
+import com.example.treinamento.ui.meus_livros.MeusLivrosViewModel
 import com.google.gson.GsonBuilder
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -23,4 +26,10 @@ fun provideRetrofit (): Retrofit {
 
 val repositorios = module {
     single { LivroRepositorio(get()) }
+}
+
+val viewModels = module {
+    factory { ComprarLivroViewModel() }
+    factory { ListarLivroViewModel() }
+    factory { MeusLivrosViewModel() }
 }

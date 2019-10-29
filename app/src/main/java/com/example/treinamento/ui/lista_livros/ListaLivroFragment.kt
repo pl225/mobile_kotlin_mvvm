@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -17,13 +16,14 @@ import kotlinx.android.synthetic.main.fragment_lista_livro.*
 
 import com.example.treinamento.databinding.FragmentListaLivroBinding
 import com.example.treinamento.db.dto.LivroDTO
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
  */
 class ListaLivroFragment : Fragment(), ItemClicavel {
 
-    lateinit var viewModel: ListarLivroViewModel
+    private val listarLivroViewModel: ListarLivroViewModel by viewModel()
     lateinit var binding: FragmentListaLivroBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,28 +47,26 @@ class ListaLivroFragment : Fragment(), ItemClicavel {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        this.viewModel =  ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
-            ListarLivroViewModel::class.java)
 
-        this.binding.viewModel = this.viewModel
+        this.binding.viewModel = this.listarLivroViewModel
 
         rcyLivros.addItemDecoration(DividerItemDecoration(activity, (rcyLivros.layoutManager as LinearLayoutManager).orientation))
         rcyLivros.adapter = LivroAdapter(listOf(), this)
 
-        this.viewModel.livros.observe(this, Observer {
+        this.listarLivroViewModel.livros.observe(this, Observer {
             if (it.isSuccessful()) {
                 val itens = it.data as List<*>
                 (rcyLivros.adapter as LivroAdapter).updateDataSet(itens.filterIsInstance<LivroDTO>())
             }
         })
 
-        this.viewModel.saldo.observe(this, Observer {
+        this.listarLivroViewModel.saldo.observe(this, Observer {
             this.binding.txtSaldo.text = String.format(getString(R.string.saldo_disponivel), it)
         })
     }
 
     override fun clicar(livro: Int) {
-        this.viewModel.selecionarLivro(livro)
+        this.listarLivroViewModel.selecionarLivro(livro)
         this.findNavController().navigate(ListaLivroFragmentDirections.actionListaLivroFragmentToComprarLivroFragment())
     }
 

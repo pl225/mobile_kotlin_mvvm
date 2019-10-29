@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 
 import com.example.treinamento.databinding.ComprarLivroFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ComprarLivroFragment : Fragment() {
 
-    private lateinit var viewModel: ComprarLivroViewModel
+    private val comprarLivroViewModel: ComprarLivroViewModel by viewModel()
     private lateinit var binding: ComprarLivroFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,10 +28,9 @@ class ComprarLivroFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        this.viewModel = ViewModelProvider(this).get(ComprarLivroViewModel::class.java)
-        this.binding.viewModel = viewModel
+        this.binding.viewModel = comprarLivroViewModel
 
-        this.viewModel.sucessoCompra.observe(this, Observer {
+        this.comprarLivroViewModel.sucessoCompra.observe(this, Observer {
             if (it.isSuccessful()) {
                 this.findNavController().navigate(ComprarLivroFragmentDirections.actionComprarLivroFragmentToListaLivroFragment())
             } else {

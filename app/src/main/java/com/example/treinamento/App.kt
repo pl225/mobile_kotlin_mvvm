@@ -3,6 +3,7 @@ package com.example.treinamento
 import android.app.Application
 import com.example.treinamento.di.network
 import com.example.treinamento.di.repositorios
+import com.example.treinamento.di.viewModels
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -20,7 +21,7 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(listOf(network, repositorios))
+            modules(listOf(network, repositorios, viewModels))
         }
     }
 }
