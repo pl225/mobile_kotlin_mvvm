@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.treinamento.R
-import com.example.treinamento.domain.model.Livro
 import kotlinx.android.synthetic.main.fragment_lista_livro.*
 
 import com.example.treinamento.databinding.FragmentListaLivroBinding
+import com.example.treinamento.db.dto.LivroDTO
 
 /**
  * A simple [Fragment] subclass.
@@ -58,7 +58,7 @@ class ListaLivroFragment : Fragment(), ItemClicavel {
         this.viewModel.livros.observe(this, Observer {
             if (it.isSuccessful()) {
                 val itens = it.data as List<*>
-                (rcyLivros.adapter as LivroAdapter).updateDataSet(itens.filterIsInstance<Livro>())
+                (rcyLivros.adapter as LivroAdapter).updateDataSet(itens.filterIsInstance<LivroDTO>())
             }
         })
 

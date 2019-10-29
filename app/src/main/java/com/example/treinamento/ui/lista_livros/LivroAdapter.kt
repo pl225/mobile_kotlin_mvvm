@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.treinamento.R
-import com.example.treinamento.domain.model.Livro
+import com.example.treinamento.db.dto.LivroDTO
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_livro.view.*
 
-class LivroAdapter(private var livros: List<Livro>, private val clicavel: ItemClicavel): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
+class LivroAdapter(private var livros: List<LivroDTO>, private val clicavel: ItemClicavel): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
 
     inner class LivroViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
@@ -39,7 +39,7 @@ class LivroAdapter(private var livros: List<Livro>, private val clicavel: ItemCl
             .into(holder.itemView.img)
     }
 
-    fun updateDataSet(list: List<Livro>) {
+    fun updateDataSet(list: List<LivroDTO>) {
         this.livros = list
         notifyDataSetChanged()
     }
