@@ -1,5 +1,6 @@
 package com.example.treinamento.domain.repository
 
+import androidx.lifecycle.Transformations
 import com.example.treinamento.api.RestApi
 import com.example.treinamento.api.IRestApi
 import com.example.treinamento.db.AppDatabase
@@ -32,7 +33,13 @@ class LivroRepositorio {
         }
     }
 
-    fun getAllDb () = this.livroDao.all()
+    fun getAllDb () =  Transformations.map(this.livroDao.all()) {
+        val livrosDTO = ArrayList<LivroDTO>()
+        for (livro in it) {
+            livrosDTO.add(LivroDTO(livro))
+        }
+        livrosDTO
+    }
 
     suspend fun insert (livro: LivroDTO) {
         if (this.livroDao.get(livro.titulo).isEmpty())
