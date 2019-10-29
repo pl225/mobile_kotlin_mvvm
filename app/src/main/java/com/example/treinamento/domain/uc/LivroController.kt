@@ -30,9 +30,9 @@ object LivroController {
     suspend fun comprarLivro(): Float {
         var dinheiro = AppSharedPreferences.getUserDinheiro()
         if (dinheiro >= livros[posSelecionado].preco) {
+            this.livroRepository.insert(livros[posSelecionado])
             dinheiro -= livros[posSelecionado].preco.toFloat()
             AppSharedPreferences.setUserDinheiro(dinheiro)
-            this.livroRepository.insert(livros[posSelecionado])
             return dinheiro
         } else {
             throw SaldoInsuficienteThrowable()

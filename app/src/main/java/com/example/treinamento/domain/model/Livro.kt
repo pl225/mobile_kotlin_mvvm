@@ -4,18 +4,18 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-data class Livro (@SerializedName("title") val titulo: String?,
+data class Livro (@SerializedName("title") val titulo: String,
                   @SerializedName("price") val preco: Double,
-                  @SerializedName("writer") val autor: String?,
-                  @SerializedName("thumbnailHd") val capa: String?,
-                  @SerializedName("date") val dataLancamento: String?): Parcelable {
+                  @SerializedName("writer") val autor: String,
+                  @SerializedName("thumbnailHd") val capa: String,
+                  @SerializedName("date") val dataLancamento: String): Parcelable {
 
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
+        parcel.readString()!!,
         parcel.readDouble(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString()
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

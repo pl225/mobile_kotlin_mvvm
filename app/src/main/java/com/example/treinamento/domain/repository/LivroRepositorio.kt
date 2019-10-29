@@ -4,6 +4,7 @@ import com.example.treinamento.api.RestApi
 import com.example.treinamento.api.IRestApi
 import com.example.treinamento.db.AppDatabase
 import com.example.treinamento.db.dto.LivroDTO
+import com.example.treinamento.exceptions.LivroJaCompradoThrowable
 
 class LivroRepositorio {
     private var client: IRestApi = RestApi.webservice()
@@ -33,5 +34,11 @@ class LivroRepositorio {
 
     fun getAllDb () = livroDao.all()
 
-    suspend fun insert (livro: LivroDTO) = livroDao.add(livro.toLivroEntity())
+    suspend fun insert (livro: LivroDTO) {
+        if (this.livroDao.get(livro.titulo).isEmpty())
+            livroDao.add(livro.toLivroEntity())
+        else
+            throw LivroJaCompradoThrowable()
+    }
+
 }

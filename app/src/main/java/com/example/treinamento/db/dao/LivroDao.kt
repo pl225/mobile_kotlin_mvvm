@@ -15,5 +15,7 @@ interface LivroDao {
     @Insert
     suspend fun add(vararg product: Livro)
 
+    @Query("SELECT * FROM livro WHERE livro.titulo = :titulo")
+    suspend fun get(titulo: String): List<Livro>
 
 }
