@@ -9,6 +9,14 @@ class LivroDTO(
     val capa: String,
     val dataLancamento: String
 ) {
+    constructor(livro: Livro) : this(
+        livro.titulo,
+        livro.preco,
+        livro.autor,
+        livro.capa,
+        livro.dataLancamento
+    )
+
     fun toLivroEntity(): Livro {
         return Livro(
             this.titulo,

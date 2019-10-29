@@ -39,4 +39,6 @@ object LivroController {
         }
     }
 
+    fun getMeusLivros () = this.livroRepository.getAllDb()
+
 }

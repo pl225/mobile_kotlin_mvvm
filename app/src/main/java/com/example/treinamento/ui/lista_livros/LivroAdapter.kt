@@ -9,12 +9,18 @@ import com.example.treinamento.db.dto.LivroDTO
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_livro.view.*
 
-class LivroAdapter(private var livros: List<LivroDTO>, private val clicavel: ItemClicavel): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
+class LivroAdapter(private var livros: List<LivroDTO>): RecyclerView.Adapter<LivroAdapter.LivroViewHolder>() {
+
+    private var clicavel: ItemClicavel? = null
+
+    constructor(livros: List<LivroDTO>, clicavel: ItemClicavel?): this (livros) {
+        this.clicavel = clicavel
+    }
 
     inner class LivroViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener {
-                clicavel.clicar(adapterPosition)
+                clicavel?.clicar(adapterPosition)
             }
         }
     }

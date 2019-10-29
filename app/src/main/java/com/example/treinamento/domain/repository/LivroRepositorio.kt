@@ -32,7 +32,7 @@ class LivroRepositorio {
         }
     }
 
-    fun getAllDb () = livroDao.all()
+    fun getAllDb () = this.livroDao.all()
 
     suspend fun insert (livro: LivroDTO) {
         if (this.livroDao.get(livro.titulo).isEmpty())
