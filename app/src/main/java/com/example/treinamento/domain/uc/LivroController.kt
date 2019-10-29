@@ -4,12 +4,14 @@ import com.example.treinamento.db.dto.LivroDTO
 import com.example.treinamento.domain.repository.LivroRepositorio
 import com.example.treinamento.exceptions.SaldoInsuficienteThrowable
 import com.example.treinamento.util.AppSharedPreferences
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-object LivroController {
+object LivroController: KoinComponent {
 
     private var posSelecionado: Int = 0
     private lateinit var livros: List<LivroDTO>
-    private var livroRepository: LivroRepositorio = LivroRepositorio()
+    private val livroRepository: LivroRepositorio by inject()
 
     suspend fun getAll(): List<LivroDTO> {
         this.livros = livroRepository.getAll()

@@ -1,14 +1,12 @@
 package com.example.treinamento.domain.repository
 
 import androidx.lifecycle.Transformations
-import com.example.treinamento.api.RestApi
 import com.example.treinamento.api.IRestApi
 import com.example.treinamento.db.AppDatabase
 import com.example.treinamento.db.dto.LivroDTO
 import com.example.treinamento.exceptions.LivroJaCompradoThrowable
 
-class LivroRepositorio {
-    private var client: IRestApi = RestApi.webservice()
+class LivroRepositorio (private val client: IRestApi) {
     private var livroDao = AppDatabase.getDatabase()!!.livroDao()
 
     suspend fun getAll(): List<LivroDTO> {
