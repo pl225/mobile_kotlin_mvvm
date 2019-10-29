@@ -1,5 +1,6 @@
 package com.example.treinamento.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -9,10 +10,10 @@ import com.example.treinamento.db.entity.Livro
 interface LivroDao {
 
     @Query("SELECT * FROM livro")
-    fun all(): List<Livro>
+    fun all(): LiveData<List<Livro>>
 
     @Insert
-    fun add(vararg product: Livro)
+    suspend fun add(vararg product: Livro)
 
 
 }

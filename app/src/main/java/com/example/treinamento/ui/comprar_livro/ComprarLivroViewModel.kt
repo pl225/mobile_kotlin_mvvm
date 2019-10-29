@@ -2,9 +2,11 @@ package com.example.treinamento.ui.comprar_livro
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.treinamento.api.Response
 import com.example.treinamento.db.dto.LivroDTO
 import com.example.treinamento.domain.uc.LivroController
+import kotlinx.coroutines.launch
 
 class ComprarLivroViewModel : ViewModel() {
 
@@ -13,7 +15,7 @@ class ComprarLivroViewModel : ViewModel() {
 
     val sucessoCompra = MutableLiveData<Response>()
 
-    fun comprarLivro () {
+    fun comprarLivro () = viewModelScope.launch {
         try {
             val novoSaldo = LivroController.comprarLivro()
             sucessoCompra.postValue(Response.success(novoSaldo))

@@ -33,5 +33,5 @@ class LivroRepositorio {
 
     fun getAllDb () = livroDao.all()
 
-    fun insert (livro: LivroDTO) = livroDao.add(livro.toLivroEntity())
+    suspend fun insert (livro: LivroDTO) = livroDao.add(livro.toLivroEntity())
 }

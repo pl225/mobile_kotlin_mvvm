@@ -1,6 +1,6 @@
 package com.example.treinamento.domain.uc
 
-import com.example.treinamento.domain.model.Livro
+import com.example.treinamento.db.dto.LivroDTO
 import com.example.treinamento.domain.repository.LivroRepositorio
 import com.example.treinamento.exceptions.SaldoInsuficienteThrowable
 import com.example.treinamento.util.AppSharedPreferences
@@ -8,11 +8,12 @@ import com.example.treinamento.util.AppSharedPreferences
 object LivroController {
 
     private var posSelecionado: Int = 0
-    private lateinit var livros: List<Livro>
+    private lateinit var livros: List<LivroDTO>
     private var livroRepository: LivroRepositorio = LivroRepositorio()
 
-    suspend fun getAll(): List<Livro> {
-        return livroRepository.getAll()
+    suspend fun getAll(): List<LivroDTO> {
+        this.livros = livroRepository.getAll()
+        return this.livros
     }
 
     fun selecionarLivro(posLivro: Int) {
@@ -22,15 +23,16 @@ object LivroController {
             this.posSelecionado = posLivro
     }
 
-    fun getLivroSelecionado (): Livro {
+    fun getLivroSelecionado (): LivroDTO {
         return this.livros[this.posSelecionado]
     }
 
-    fun comprarLivro(): Float {
+    suspend fun comprarLivro(): Float {
         var dinheiro = AppSharedPreferences.getUserDinheiro()
         if (dinheiro >= livros[posSelecionado].preco) {
             dinheiro -= livros[posSelecionado].preco.toFloat()
             AppSharedPreferences.setUserDinheiro(dinheiro)
+            this.livroRepository.insert(livros[posSelecionado])
             return dinheiro
         } else {
             throw SaldoInsuficienteThrowable()
